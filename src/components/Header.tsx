@@ -24,7 +24,6 @@ export function Header({ allTalks }: HeaderProps) {
   const filteredTalks = allTalks.filter(
     (talk) =>
       talk.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      talk.speaker.toLowerCase().includes(searchQuery.toLowerCase()) ||
       talk.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       talk.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
   );
@@ -36,11 +35,16 @@ export function Header({ allTalks }: HeaderProps) {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-foreground border-2 border-foreground flex items-center justify-center">
-                <span className="text-background font-bold text-xl">T</span>
+                <span className="text-background font-bold text-xl">В</span>
               </div>
-              <h1 className="text-xl md:text-2xl font-bold text-foreground uppercase tracking-wider">
-                techwatch.dev
-              </h1>
+              <div>
+                <h1 className="text-xl md:text-2xl font-bold text-foreground uppercase tracking-wider font-mono">
+                  ВЕРЕЩАГИН
+                </h1>
+                <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider">
+                  СОБРАНИЕ КАРТИН
+                </p>
+              </div>
             </div>
 
             <div className="flex-1 max-w-md w-full">
@@ -48,7 +52,7 @@ export function Header({ allTalks }: HeaderProps) {
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-foreground w-5 h-5" />
                 <Input
                   type="text"
-                  placeholder="ПОИСК ДОКЛАДОВ..."
+                  placeholder="ПОИСК ПО КАРТИНАМ..."
                   value={searchQuery}
                   onChange={(e) => handleSearch(e.target.value)}
                   className="pl-12 bg-background border-2 border-foreground focus:ring-0 focus:border-accent h-12 text-sm font-mono uppercase placeholder:text-muted-foreground rounded-none"
@@ -67,13 +71,19 @@ export function Header({ allTalks }: HeaderProps) {
             </h3>
             <div className="text-center mb-12">
               <div className="inline-block bg-foreground text-background px-4 py-2 font-mono font-bold text-sm">
-                {filteredTalks.length} {filteredTalks.length === 1 ? "ДОКЛАД" : filteredTalks.length < 5 ? "ДОКЛАДА" : "ДОКЛАДОВ"} НАЙДЕНО
+                {filteredTalks.length}{" "}
+                {filteredTalks.length === 1
+                  ? "КАРТИНА"
+                  : filteredTalks.length < 5
+                  ? "КАРТИНЫ"
+                  : "КАРТИН"}{" "}
+                НАЙДЕНО
               </div>
             </div>
             {filteredTalks.length === 0 ? (
               <div className="text-center">
                 <p className="text-foreground font-mono uppercase tracking-wide text-lg">
-                  ДОКЛАДЫ ПО ВАШЕМУ ЗАПРОСУ НЕ НАЙДЕНЫ.
+                  КАРТИНЫ ПО ВАШЕМУ ЗАПРОСУ НЕ НАЙДЕНЫ.
                 </p>
               </div>
             ) : (
